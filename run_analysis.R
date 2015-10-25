@@ -37,19 +37,16 @@ activity_labels <- read.table("./project_data/UCI HAR Dataset/activity_labels.tx
 ##4  Read in features (list of all features)
 features <- read.table("./project_data/UCI HAR Dataset/features.txt")
 
-##Merge the training data with the test data via rbind####################
+##Merge the training data with the test data##########################
 
-#Label column names
+#First label column names
 colnames(activity_labels) <- c("ActivityID", "Activity")
-
 colnames(y_test) <- c("ActivityID")
 colnames(subject_test) <- c("SubjectID")
-
 colnames(y_train) <- c("ActivityID")
 colnames(subject_train) <- c("SubjectID")
 
-#Add flags labelling the test data and the train data, so when you 
-#rbind them together you can still tell them apart somehow
+#Add flags labelling the test data and the train data
 subject_test_with_data_type_flag <- subject_test
 subject_train_with_data_type_flag <- subject_train
 
@@ -88,10 +85,7 @@ library(dplyr)
 #Using the row numbers we get from features_with_mean_or_std, 
 #extract these same column numbers from combined_test_data_and_training_data_with_activity_labels
 names_of_label_columns_to_keep <- c("ActivityID", "Activity","SubjectID","data_type")
-
-
 names_of_measurement_columns_to_keep <- as.character(features_with_mean_or_std$V2)
-
 unioned_list_of_cols_to_keep <- union(names_of_label_columns_to_keep, names_of_measurement_columns_to_keep)
 
 ##Label the data set with descriptive variable names.#############################
