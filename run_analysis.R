@@ -2,15 +2,16 @@
 setwd("C:/Users/Katelyn/Documents")
 
 #If the zip file doesn't already exist in the current working directory, 
-#then download and unzip the files into the working directory into a folder
+#then download it and unzip the files into the working directory into a folder
 if (!file.exists("./course_project_dataset.zip")){
   download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip",
                 destfile="./course_project_dataset.zip")
   
   unzip("./course_project_dataset.zip", files=NULL, list=FALSE, overwrite=TRUE, exdir="./project_data")
 }
-##Read in the needed files
+#Read in the relevant files (don't need to read in the files in the Inertial Signals folders)
 subject_test <- read.table("./project_data/UCI HAR Dataset/test/subject_test.txt")
+
 X_test <- read.table("./project_data/UCI HAR Dataset/test/x_test.txt")
 y_test <- read.table("./project_data/UCI HAR Dataset/test/y_test.txt")
 subject_train <- read.table("./project_data/UCI HAR Dataset/train/subject_train.txt")
@@ -60,9 +61,6 @@ library(stringr)
 features_with_mean_or_std <- 
   features[str_detect(features[,2], fixed("mean()", ignore_case=FALSE)) | 
              str_detect(features[,2], fixed("std()", ignore_case=FALSE)),]
-
-#Load the dplyr library so we can use the select function
-library(dplyr)
 
 #Extract the columns of interest from combined_test_data_and_training_data_with_activity_labels
 names_of_label_columns_to_keep <- c("ActivityID", "Activity","SubjectID","data_type")
