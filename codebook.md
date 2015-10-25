@@ -14,3 +14,4 @@ Key Variable Definitions in the final result: averages_by_subject_and_activity
 * mean() stands for mean value.
 * std() stands for standard deviation.
 
+For more info, I've uploaded the features_info.txt file for reference as to units.  See this file in the repo.
